@@ -51,10 +51,20 @@
 - 装饰器类是对功能的增强
 ### 场景
 - 对原有类进行增强
-
 ### 实现
 
 ## 解释器模式
+### 概念
+- 解释器模式为某个语言定义它的语法（或者叫文法）表示，并定义一个解释器用来处理这个语法。
+> Interpreter pattern is used to defines a grammatical representation for a language and provides an interpreter to deal with this grammar
+### 场景
+- case01：未使用解释器模式的加减乘除的实现
+- case02：基于解释器模式的加减乘除的实现
+- 项目应用场景：?
+
+### 实现
+
+## 单例模式
 ### 概念
 ### 场景
 ### 实现

@@ -8,13 +8,12 @@ import com.eports.design_pattern.decorator.case01.decorators.Vegetables;
  * @description: Application
  * @author: lizhenzhen
  * @date: 2021-04-20 18:17
- **/
+s **/
 public class Application {
     public static void main(String[] args) {
         /**
          * {@link Fish}、{@link Meat}、{@link Vegetables} 都属于{@link Lunch}类的装饰类
          * {@link Fish}、{@link Meat}、{@link Vegetables}、{@link Lunch}都继承自{@link AbstractLunch}
-         *
          */
         AbstractLunch lunch = new Lunch(),
                 fish = new Fish(lunch),

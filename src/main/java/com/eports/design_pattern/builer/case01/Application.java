@@ -1,6 +1,6 @@
 package com.eports.design_pattern.builer.case01;
 
-public class Main {
+public class Application {
 
     public static void main(String[] args) {
         ResourcePoolConfig resourcePoolConfig = new ResourcePoolConfig.Builder()
