@@ -10,7 +10,6 @@ import com.eports.design_pattern.chain_of_responsibility.case02.filter.SexyWordF
  * @date: 2021-04-20 17:09
  **/
 public class Application {
-
     public static void main(String[] args) {
         WordFilterChain filterChain = new WordFilterChain();
         filterChain.addwordFilter(new AdsWordFilter());
@@ -21,5 +20,4 @@ public class Application {
         System.out.println("------------------------------------------------");
         filterChain.doFilter("this is a healthy message");
     }
-
 }

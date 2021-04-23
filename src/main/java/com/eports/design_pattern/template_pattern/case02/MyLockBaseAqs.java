@@ -14,7 +14,6 @@ public class MyLockBaseAqs {
      * 同步器
      */
     private Sync sync = new Sync();
-
     /**
      * Inner class
      */

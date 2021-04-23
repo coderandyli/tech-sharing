@@ -49,12 +49,15 @@ public class ResourcePoolConfig {
         public Builder() {
         }
 
+        /**
+         * build ResourcePoolConfig对象，同时也可以对一些属性进行必要的校验
+         */
         public ResourcePoolConfig build() {
             // 属性之前存在依赖性，build时进行相关逻辑校验
             if (minIdle > maxIdle) {
                 throw new IllegalArgumentException("maxIdle should not less than maxIdle");
             }
-            if (minIdle > maxTotal || minIdle > maxIdle) {
+            if (maxIdle > maxTotal || minIdle > maxIdle) {
                 throw new IllegalArgumentException("...");
             }
             return new ResourcePoolConfig(this);
@@ -92,5 +95,4 @@ public class ResourcePoolConfig {
             return this;
         }
     }
-
 }

@@ -6,7 +6,7 @@ public class Application {
         ResourcePoolConfig resourcePoolConfig = new ResourcePoolConfig.Builder()
                 .setName("李振")
                 .setMaxTotal(10)
-                .setMaxIdle(10)
+                .setMaxIdle(11)
                 .setMinIdle(9)
                 .build();
         System.out.println(resourcePoolConfig);

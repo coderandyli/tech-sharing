@@ -6,7 +6,6 @@ package com.eports.design_pattern.proxy.case01;
  * @date: 2021-04-21 16:43
  **/
 public class Student implements Behavior{
-
     @Override
     public void eat() {
         System.out.println("student eat....");
