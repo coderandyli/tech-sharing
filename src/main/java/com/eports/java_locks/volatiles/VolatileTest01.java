@@ -1,7 +1,7 @@
 package com.eports.java_locks.volatiles;
 
 /**
- * @Description: volatile在单例中的应用 - 禁止指令重拍
+ * @Description: volatile在单例中的应用 - 禁止指令重（保证有序性）
  * @Date 2021/6/16 3:16 下午
  * @Created by lizhenzhen
  */
