@@ -3,11 +3,12 @@ package com.eports.java_locks.aqs;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
- * @Description: 基于AQS自定义锁
+ * 基于AQS实现的锁
+ *
  * @Date 2021/6/17 3:32 下午
  * @Created by lizhenzhen
  */
-public class MyLockBaseAqs {
+public class LockBasedOnAqs {
     /**
      * 同步器
      */
@@ -55,7 +56,7 @@ public class MyLockBaseAqs {
     static int cnt = 0;
 
     public static void main(String[] args) {
-        MyLockBaseAqs myLock = new MyLockBaseAqs();
+        LockBasedOnAqs myLock = new LockBasedOnAqs();
 
         Runnable runnable = new Runnable() {
             @Override

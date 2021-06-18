@@ -50,6 +50,8 @@ Java的volatile关键字就是设计用来解决变量可见性问题。将变�
 
 ## AQS(AbstractQueuedSynchronizer)
 > 抽象队列同步器
+### AQS基本结构及原理
+
 
 ### ReentrantLock
 属于api层面实现的
