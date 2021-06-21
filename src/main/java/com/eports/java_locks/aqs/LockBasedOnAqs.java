@@ -1,6 +1,9 @@
 package com.eports.java_locks.aqs;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 
 /**
  * 基于AQS实现的锁
@@ -8,7 +11,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @Date 2021/6/17 3:32 下午
  * @Created by lizhenzhen
  */
-public class LockBasedOnAqs {
+public class LockBasedOnAqs implements Lock {
     /**
      * 同步器
      */
@@ -38,55 +41,57 @@ public class LockBasedOnAqs {
         }
     }
 
-    /**
-     * 加锁
-     */
+    @Override
     public void lock() {
         sync.acquire(1);
     }
 
-    /**
-     * 解锁
-     */
+    @Override
     public void unlock() {
         sync.release(1);
     }
 
+    @Override
+    public void lockInterruptibly() throws InterruptedException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean tryLock() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Condition newCondition() {
+        throw new UnsupportedOperationException();
+    }
 
     static int cnt = 0;
-
     public static void main(String[] args) {
-        LockBasedOnAqs myLock = new LockBasedOnAqs();
+        LockBasedOnAqs lock = new LockBasedOnAqs();
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                // 加锁
-                myLock.lock();
+        Runnable runnable = () -> {
+            lock.lock();
 
-                int n = 10000;
-                while (n > 0) {
-                    cnt++;
-                    n--;
-                }
-
-                // 释放锁
-                myLock.unlock();
+            int n = 10000;
+            while (n > 0) {
+                cnt++;
+                n--;
             }
+
+            lock.unlock();
         };
 
-        Thread t1 = new Thread(runnable);
-        Thread t2 = new Thread(runnable);
-        Thread t3 = new Thread(runnable);
-        Thread t4 = new Thread(runnable);
-        Thread t5 = new Thread(runnable);
-        Thread t6 = new Thread(runnable);
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
-        t5.start();
-        t6.start();
+        new Thread(runnable).start();
+        new Thread(runnable).start();
+        new Thread(runnable).start();
+        new Thread(runnable).start();
+        new Thread(runnable).start();
 
         try {
             //等待足够长的时间 确保上述线程均执行完毕
