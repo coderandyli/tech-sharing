@@ -3,7 +3,13 @@ package com.eports.java_locks.aqs;
 /**
  * 基于链表实现的队列
  *
- * <p> 队列数据结构
+ * <h3> 示例目的 <h3/>
+ * 了解队列先进先出的特性
+ *
+ * <h3> 特性 <h3/>
+ * 先进先出
+ *
+ * <h3> 数据结构 <h3/>
  * <pre>
  *          +-----+  next  +-----+        +-----+
  *     head |     |  --->  |     |  --->  |     | tail
@@ -14,7 +20,6 @@ package com.eports.java_locks.aqs;
  *
  * @Date 2021/6/18 3:28 下午
  * @Created by lizhenzhen
- *
  */
 public class QueueBasedOnLinkedList {
     /**

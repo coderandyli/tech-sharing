@@ -7,11 +7,23 @@ import java.util.concurrent.locks.Lock;
 
 /**
  * CLH自旋锁的实现
+ *
+ * <h3> 示例目的 <h3/>
+ * 主要了解什么是自旋
+ *
  * <h3> 概述 <h3/>
  * - CLH队列锁：是一个自旋锁，能确保无饥饿性，提供先来先服务的公平性。同时它也是一种基于链表的可扩展、高性能、公平的自旋锁，
- *   申请线程只在本地变量上自旋，它不断轮询前驱的状态，如果发现前驱释放了锁就结束自旋
+ * 申请线程只在本地变量上自旋，它不断轮询前驱的状态，如果发现前驱释放了锁就结束自旋
  * - 这个算法很妙的点在于，在一个CAS操作帮助下，所有等待获取锁的线程之下的节点轻松且正确地构建成了全局队列。
- *   等待中的线程正如队列中的节点依次获取锁。
+ * 等待中的线程正如队列中的节点依次获取锁。
+ * - 在前驱节点上自旋
+ *
+ * <h3> 数据结构 <h3/>
+ * https://www.javazhiyin.com/wp-content/uploads/2020/08/java9-1598792426-1.png
+ *
+ * <h3> 扩展 <h3/>
+ * - CLH 与 MCS 区别？
+ * - CLH 为什么在前驱节点上自旋？而不再当前节点自旋
  *
  * <h3> Reference <h3/>
  * - https://stackoverflow.com/questions/43628187/why-clh-lock-need-prev-node-in-java
@@ -32,6 +44,7 @@ public class CLHLock implements Lock {
      * Inner class
      */
     private static class QNode {
+        // true if the lock has been acquired or is waiting to be acquired
         volatile boolean locked;
     }
 
@@ -88,11 +101,12 @@ public class CLHLock implements Lock {
     }
 
     static int cnt = 0;
+
     public static void main(String[] args) {
         CLHLock myLock = new CLHLock();
 
         Runnable runnable = () -> {
-             myLock.lock();
+            myLock.lock();
 
             int n = 10000;
             while (n > 0) {
@@ -100,7 +114,7 @@ public class CLHLock implements Lock {
                 n--;
             }
 
-             myLock.unlock();
+            myLock.unlock();
         };
 
         new Thread(runnable).start();
