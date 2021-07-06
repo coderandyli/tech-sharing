@@ -1,11 +1,10 @@
 package com.eports.java_locks.extension;
 
 /**
- * @Description:
+ * 指令重排序测试
+ *
  * @Date 2021/6/16 3:50 下午
  * @Created by lizhenzhen
- *
- * 指令重排序测试
  */
 public class Reordering {
     static int x = 0, y = 0;

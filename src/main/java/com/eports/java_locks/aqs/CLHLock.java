@@ -28,6 +28,7 @@ import java.util.concurrent.locks.Lock;
  * <h3> Reference <h3/>
  * - https://stackoverflow.com/questions/43628187/why-clh-lock-need-prev-node-in-java
  * - https://www.javazhiyin.com/66571.html
+ * - https://www.cnblogs.com/yubo/archive/2010/04/23/1718810.html
  *
  * @Date 2021/6/18 5:19 下午
  * @Created by lizhenzhen
