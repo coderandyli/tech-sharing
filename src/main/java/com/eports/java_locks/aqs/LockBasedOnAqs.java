@@ -8,8 +8,18 @@ import java.util.concurrent.locks.Lock;
 /**
  * 基于AQS实现的锁
  *
- * AQS加锁/解锁过程解析
+ * <h3> 基本结构 <h3/>
+ *  - 实现{@link Lock}接口.
+ *  - 内部定义一个同步器，继承{@link AbstractQueuedSynchronizer}
  *
+ * <h3> 加锁/解锁 <h3/>
+ *  -【加锁】子类实现{@link AbstractQueuedSynchronizer#tryAcquire(int)}方法，编写获锁逻辑，
+ *  该方法会在{@link AbstractQueuedSynchronizer#acquire(int)}方法中被调用
+ *  -【解锁】子类实现{@link AbstractQueuedSynchronizer#tryRelease(int)}方法，编写释放锁逻辑，
+ *  该方法会在{@link AbstractQueuedSynchronizer#release(int)}方法中被调用
+ *
+ *  <h3> Question <h3/>
+ *  - 该锁是一个公平锁吗？
  *
  *
  * @Date 2021/6/17 3:32 下午
@@ -26,6 +36,9 @@ public class LockBasedOnAqs implements Lock {
      */
     private static class Sync extends AbstractQueuedSynchronizer {
 
+        /**
+         * 尝试获取锁
+         */
         @Override
         protected boolean tryAcquire(int arg) {
             if (compareAndSetState(0, 1)) {
@@ -37,6 +50,9 @@ public class LockBasedOnAqs implements Lock {
             return false;
         }
 
+        /**
+         * 释放锁
+         */
         @Override
         protected boolean tryRelease(int arg) {
             setExclusiveOwnerThread(null);

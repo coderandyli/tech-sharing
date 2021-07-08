@@ -1,8 +1,4 @@
 # Java中的"锁"事
-# 编写思路
-通过volatile介绍cpu缓存模型、可见性及指令重拍 --> 引出是否能够保证线程安全 ---> 不能，引出 "锁" 
----> 锁的分类 ---> synchronized ---> AQS（api实现的锁的鼻祖）
-
 ## volatile关键字
 volatile轻量级的同步关键字
 - 保证可见性：保证volatile变量的所有读取都是直接从主存读取，所有写入都是直接写入到主存中。
@@ -72,15 +68,32 @@ Java的volatile关键字就是设计用来解决变量可见性问题。将变�
 #### CLH锁
 - 详见 com.eports.java_locks.aqs.CLHLock
 
+#### AQS工作流程
+![images](../../../../../../images/java-locks/aqs_flowchart.jpg)
+- AQS代码简单走查
+
 ### 加锁/解锁过程分析
 - 详见 com.eports.java_locks.aqs.LockBasedOnAqs
 
 ### 公平锁与非公平锁
-- 
+> 以ReentrantLock中tryAcquire方法实现为例
 
-### 可中断性
+![images](../../../../../../images/java-locks/reentrantLock-tryAcquire.jpg)
 
-### ReentrantLock
-属于api层面实现的
+### 独占模式与共享模式
+> 共享模式下锁可以被多个线程占有 
+- 详见 com.eports.java_locks.aqs.CountDownLatchDemo
 
-## Reference
+### 可重入锁
+可重入锁：是指在同一个线程在外层方法获取锁的时候，再进入该线程的内层方法会自动获取锁（前提锁对象得是同一个对象或者class）
+```
+    // 可重入性代码演示
+    // 如果synchronized不具有可重入性，以下代码就会造成死锁（当前线程调用doOthers时，需要将执行doSomething时获取的的当前对象的锁释放掉，实际上当前对象锁已被当前线程持有，且无法释放，造成死锁）
+    public synchronized void doSomething(){
+        System.out.println("方法1执行...");
+        doOthers();
+    }
+    public synchronized void doOthers(){
+        System.out.println("方法2执行...");
+    }
+```
