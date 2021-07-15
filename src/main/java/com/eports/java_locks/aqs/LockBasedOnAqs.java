@@ -63,6 +63,7 @@ public class LockBasedOnAqs implements Lock {
 
     @Override
     public void lock() {
+        // acquire 获取
         sync.acquire(1);
     }
 

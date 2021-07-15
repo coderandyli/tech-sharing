@@ -7,6 +7,8 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * ReentrantLock Codition应用之【生产者-消费者问题】，即有界缓冲区问题
  *
+ * JDK源码 - ArrayBlockingQueue
+ *
  * @Date 2021/7/8 1:40 下午
  * @Created by lizhenzhen
  */
